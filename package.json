@@ -1,0 +1,17 @@
+{
+  "name": "blog",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A VitePress-powered blog ready for GitHub Pages.",
+  "scripts": {
+    "dev": "vitepress dev src",
+    "build": "vitepress build src",
+    "preview": "vitepress preview src"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
