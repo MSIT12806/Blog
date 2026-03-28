@@ -2,9 +2,7 @@
 
 這裡會集中所有文章的入口。
 
-## 2026
-
-- [建立第一篇文章](/posts/hello-vitepress)
+<PostList />
 
 ## 撰寫新文章方式
 
@@ -21,3 +19,5 @@ description: 簡短摘要
 
 文章內容寫在這裡。
 ```
+
+首頁與這個列表頁都會自動讀取 `src/posts/*.md`，並依照 front matter 的 `date` 由新到舊排序。

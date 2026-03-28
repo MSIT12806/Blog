@@ -27,8 +27,9 @@ features:
 
 ## 最新文章
 
-- [建立第一篇文章](/posts/hello-vitepress)
-- [文章列表](/posts/)
+<PostList :limit="5" />
+
+[查看所有文章](/posts/)
 
 ## 這個 MVP 包含什麼
 

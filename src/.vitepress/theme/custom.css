@@ -60,6 +60,55 @@ body {
   box-shadow: 0 16px 40px rgba(77, 36, 25, 0.06);
 }
 
+.post-list {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.post-card {
+  padding: 1.2rem 1.1rem;
+  border: 1px solid rgba(77, 36, 25, 0.08);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 250, 244, 0.94), rgba(255, 247, 237, 0.88));
+  box-shadow: 0 16px 32px rgba(77, 36, 25, 0.06);
+}
+
+.post-card-date {
+  margin: 0 0 0.35rem;
+  color: var(--vp-c-text-2);
+  font-size: 0.92rem;
+}
+
+.post-card-title {
+  margin: 0;
+}
+
+.post-card-title a {
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+}
+
+.post-card-title a:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.post-card-description {
+  margin: 0.6rem 0 0;
+  color: var(--vp-c-text-2);
+}
+
+.post-card-link {
+  display: inline-block;
+  margin-top: 0.9rem;
+  font-weight: 600;
+}
+
+.post-list-empty {
+  margin: 0;
+  color: var(--vp-c-text-2);
+}
+
 .vp-doc a,
 .VPLink.link {
   text-underline-offset: 0.18em;
