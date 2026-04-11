@@ -20,9 +20,11 @@ export default {
     logo: '/mark.svg',
     nav: [
       { text: '首頁', link: '/' },
-      { text: '認識我', link: '/profile' },
+      { text: '接案合作', link: '/services' },
       { text: '文章', link: '/posts/' },
       { text: '關於', link: '/about' }
+      // 履歷頁入口暫時隱藏。
+      // 如需恢復，加入：{ text: '認識我', link: '/profile' },
     ],
     socialLinks,
     footer: {
