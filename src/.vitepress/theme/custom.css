@@ -119,6 +119,56 @@ body {
   margin: 0.4rem 0;
 }
 
+.profile-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.profile-hero-card {
+  padding: 1.4rem;
+  border: 1px solid rgba(77, 36, 25, 0.08);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 250, 244, 0.96), rgba(255, 246, 234, 0.92));
+  box-shadow: 0 18px 36px rgba(77, 36, 25, 0.07);
+}
+
+.profile-hero-card h2 {
+  margin-top: 0.2rem;
+  margin-bottom: 0.8rem;
+  line-height: 1.25;
+}
+
+.profile-hero-card p:last-child {
+  margin-bottom: 0;
+}
+
+.profile-eyebrow {
+  margin: 0;
+  color: var(--vp-c-brand-1);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.profile-hero-meta {
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-hero-meta::after {
+  content: '';
+  position: absolute;
+  inset: auto -40px -60px auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(224, 168, 59, 0.22), rgba(224, 168, 59, 0));
+  pointer-events: none;
+}
+
 @media (max-width: 960px) {
   .VPNavBar.has-sidebar .content-body,
   .VPNavBar .content-body {
@@ -127,5 +177,9 @@ body {
 
   .VPHero .text {
     max-width: none;
+  }
+
+  .profile-hero {
+    grid-template-columns: 1fr;
   }
 }

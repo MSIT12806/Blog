@@ -1,6 +1,9 @@
+import { spawnSync } from 'node:child_process'
+
 const repository = process.env.GITHUB_REPOSITORY ?? ''
 const [, repoName = 'Blog'] = repository.split('/')
 const isGitHubActions = process.env.GITHUB_ACTIONS === 'true'
+const hasGit = !spawnSync('git', ['--version'], { stdio: 'ignore' }).error
 const socialLinks = repository
   ? [{ icon: 'github', link: `https://github.com/${repository}` }]
   : []
@@ -8,22 +11,23 @@ const socialLinks = repository
 /** @type {import('vitepress').UserConfig} */
 export default {
   lang: 'zh-Hant',
-  title: 'Alega Blog',
-  description: '使用 VitePress 與 Markdown 建立的靜態 Blog',
+  title: 'Robin',
+  description: 'Robin 的技術筆記、作品入口與個人介紹網站',
   cleanUrls: true,
-  lastUpdated: true,
+  lastUpdated: hasGit,
   base: isGitHubActions ? `/${repoName}/` : '/',
   themeConfig: {
     logo: '/mark.svg',
     nav: [
       { text: '首頁', link: '/' },
+      { text: '認識我', link: '/profile' },
       { text: '文章', link: '/posts/' },
       { text: '關於', link: '/about' }
     ],
     socialLinks,
     footer: {
-      message: 'Built with VitePress',
-      copyright: 'Copyright © 2026 Alega Blog'
+      message: 'Built with VitePress and shaped into a personal site.',
+      copyright: 'Copyright © 2026 Robin'
     },
     outline: {
       label: '本頁內容'
