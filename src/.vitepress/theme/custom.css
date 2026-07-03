@@ -1,26 +1,178 @@
 :root {
-  --vp-c-brand-1: #b83b24;
-  --vp-c-brand-2: #d55f3f;
-  --vp-c-brand-3: #8d2818;
-  --vp-c-brand-soft: rgba(184, 59, 36, 0.14);
-  --vp-c-bg: #f7f1e8;
-  --vp-c-bg-alt: #efe3d3;
-  --vp-c-bg-elv: #fffaf4;
-  --vp-c-text-1: #231815;
-  --vp-c-text-2: #5f4c45;
-  --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: linear-gradient(135deg, #4d2419 0%, #b83b24 45%, #e0a83b 100%);
-  --vp-home-hero-image-background-image: radial-gradient(circle at top, rgba(224, 168, 59, 0.48), rgba(184, 59, 36, 0.2) 45%, rgba(247, 241, 232, 0) 72%);
-  --vp-home-hero-image-filter: drop-shadow(0 20px 44px rgba(77, 36, 25, 0.2));
   --vp-font-family-base: 'IBM Plex Sans', sans-serif;
   --vp-font-family-mono: 'IBM Plex Sans', monospace;
   --vp-font-family-heading: 'Fraunces', serif;
+
+  /* Light Mode color palette */
+  --site-light-brand-1: #b83b24;
+  --site-light-brand-2: #d55f3f;
+  --site-light-brand-3: #8d2818;
+  --site-light-brand-1-rgb: 184 59 36;
+  --site-light-brand-3-rgb: 141 40 24;
+  --site-light-accent-gold: #e0a83b;
+  --site-light-accent-gold-rgb: 224 168 59;
+  --site-light-bg-page-start: #fcf7f1;
+  --site-light-bg-page-mid: #f7f1e8;
+  --site-light-bg-page-end: #f0e4d4;
+  --site-light-bg-alt: #efe3d3;
+  --site-light-bg-elevated: #fffaf4;
+  --site-light-bg-card-end: #fff6ea;
+  --site-light-bg-post-end: #fff7ed;
+  --site-light-text-1: #231815;
+  --site-light-text-2: #5f4c45;
+  --site-light-text-deep: #4d2419;
+  --site-light-text-deep-rgb: 77 36 25;
+
+  /* Dark Mode color palette */
+  --site-dark-brand-1: #ff9b7a;
+  --site-dark-brand-2: #f47d58;
+  --site-dark-brand-3: #ffb895;
+  --site-dark-brand-1-rgb: 255 155 122;
+  --site-dark-brand-3-rgb: 255 184 149;
+  --site-dark-accent-gold: #f2c66d;
+  --site-dark-accent-gold-rgb: 242 198 109;
+  --site-dark-bg-page-start: #17110f;
+  --site-dark-bg-page-mid: #211816;
+  --site-dark-bg-page-end: #2d211c;
+  --site-dark-bg-alt: #2a201d;
+  --site-dark-bg-elevated: #322620;
+  --site-dark-bg-card-end: #271d1a;
+  --site-dark-bg-post-end: #2b211d;
+  --site-dark-text-1: #fff4e8;
+  --site-dark-text-2: #d8c4b8;
+  --site-dark-text-deep: #fff0dc;
+  --site-dark-text-deep-rgb: 255 240 220;
+
+  /* Active semantic colors: Light Mode default */
+  --vp-c-brand-1: var(--site-light-brand-1);
+  --vp-c-brand-2: var(--site-light-brand-2);
+  --vp-c-brand-3: var(--site-light-brand-3);
+  --vp-c-brand-soft: rgb(var(--site-light-brand-1-rgb) / 0.14);
+  --vp-c-bg: var(--site-light-bg-page-mid);
+  --vp-c-bg-alt: var(--site-light-bg-alt);
+  --vp-c-bg-elv: var(--site-light-bg-elevated);
+  --vp-c-text-1: var(--site-light-text-1);
+  --vp-c-text-2: var(--site-light-text-2);
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(
+    135deg,
+    var(--site-light-text-deep),
+    var(--site-light-brand-1) 45%,
+    var(--site-light-accent-gold)
+  );
+  --vp-home-hero-image-background-image: radial-gradient(
+    circle at top,
+    rgb(var(--site-light-accent-gold-rgb) / 0.48),
+    rgb(var(--site-light-brand-1-rgb) / 0.2) 45%,
+    rgb(247 241 232 / 0) 72%
+  );
+  --vp-home-hero-image-filter: drop-shadow(0 20px 44px rgb(var(--site-light-text-deep-rgb) / 0.2));
+  --site-bg-body: radial-gradient(
+      circle at top left,
+      rgb(var(--site-light-accent-gold-rgb) / 0.18),
+      transparent 26%
+    ),
+    linear-gradient(
+      180deg,
+      var(--site-light-bg-page-start),
+      var(--site-light-bg-page-mid) 38%,
+      var(--site-light-bg-page-end)
+    );
+  --site-nav-bg: rgb(255 250 244 / 0.72);
+  --site-card-bg: linear-gradient(
+    180deg,
+    rgb(255 250 244 / 0.96),
+    rgb(255 246 234 / 0.92)
+  );
+  --site-feature-bg: linear-gradient(
+    180deg,
+    rgb(255 250 244 / 0.92),
+    rgb(255 248 238 / 0.88)
+  );
+  --site-post-bg: linear-gradient(
+    180deg,
+    rgb(255 250 244 / 0.94),
+    rgb(255 247 237 / 0.88)
+  );
+  --site-border-subtle: rgb(var(--site-light-text-deep-rgb) / 0.08);
+  --site-border-tag: rgb(var(--site-light-text-deep-rgb) / 0.1);
+  --site-shadow-soft: rgb(var(--site-light-text-deep-rgb) / 0.06);
+  --site-shadow-card: rgb(var(--site-light-text-deep-rgb) / 0.07);
+  --site-note-bg: rgb(var(--site-light-brand-1-rgb) / 0.08);
+  --site-tag-bg: rgb(255 250 244 / 0.9);
+  --site-meta-glow: radial-gradient(
+    circle,
+    rgb(var(--site-light-accent-gold-rgb) / 0.22),
+    rgb(var(--site-light-accent-gold-rgb) / 0)
+  );
+}
+
+.dark {
+  --vp-c-brand-1: var(--site-dark-brand-1);
+  --vp-c-brand-2: var(--site-dark-brand-2);
+  --vp-c-brand-3: var(--site-dark-brand-3);
+  --vp-c-brand-soft: rgb(var(--site-dark-brand-1-rgb) / 0.2);
+  --vp-c-bg: var(--site-dark-bg-page-mid);
+  --vp-c-bg-alt: var(--site-dark-bg-alt);
+  --vp-c-bg-elv: var(--site-dark-bg-elevated);
+  --vp-c-text-1: var(--site-dark-text-1);
+  --vp-c-text-2: var(--site-dark-text-2);
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(
+    135deg,
+    var(--site-dark-text-deep),
+    var(--site-dark-brand-1) 48%,
+    var(--site-dark-accent-gold)
+  );
+  --vp-home-hero-image-background-image: radial-gradient(
+    circle at top,
+    rgb(var(--site-dark-accent-gold-rgb) / 0.34),
+    rgb(var(--site-dark-brand-1-rgb) / 0.18) 45%,
+    rgb(33 24 22 / 0) 72%
+  );
+  --vp-home-hero-image-filter: drop-shadow(0 22px 48px rgb(0 0 0 / 0.38));
+  --site-bg-body: radial-gradient(
+      circle at top left,
+      rgb(var(--site-dark-accent-gold-rgb) / 0.1),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      var(--site-dark-bg-page-start),
+      var(--site-dark-bg-page-mid) 42%,
+      var(--site-dark-bg-page-end)
+    );
+  --site-nav-bg: rgb(50 38 32 / 0.72);
+  --site-card-bg: linear-gradient(
+    180deg,
+    rgb(50 38 32 / 0.96),
+    rgb(39 29 26 / 0.92)
+  );
+  --site-feature-bg: linear-gradient(
+    180deg,
+    rgb(50 38 32 / 0.9),
+    rgb(43 33 29 / 0.86)
+  );
+  --site-post-bg: linear-gradient(
+    180deg,
+    rgb(50 38 32 / 0.94),
+    rgb(43 33 29 / 0.88)
+  );
+  --site-border-subtle: rgb(var(--site-dark-text-deep-rgb) / 0.12);
+  --site-border-tag: rgb(var(--site-dark-text-deep-rgb) / 0.16);
+  --site-shadow-soft: rgb(0 0 0 / 0.28);
+  --site-shadow-card: rgb(0 0 0 / 0.32);
+  --site-note-bg: rgb(var(--site-dark-brand-1-rgb) / 0.14);
+  --site-tag-bg: rgb(255 244 232 / 0.08);
+  --site-meta-glow: radial-gradient(
+    circle,
+    rgb(var(--site-dark-accent-gold-rgb) / 0.18),
+    rgb(var(--site-dark-accent-gold-rgb) / 0)
+  );
 }
 
 body {
-  background:
-    radial-gradient(circle at top left, rgba(224, 168, 59, 0.18), transparent 26%),
-    linear-gradient(180deg, #fcf7f1 0%, #f7f1e8 38%, #f0e4d4 100%);
+  background: var(--site-bg-body);
 }
 
 .VPNavBar,
@@ -31,9 +183,9 @@ body {
 
 .VPNavBar.has-sidebar .content-body,
 .VPNavBar .content-body {
-  background: rgba(255, 250, 244, 0.72);
+  background: var(--site-nav-bg);
   border-radius: 999px;
-  border: 1px solid rgba(77, 36, 25, 0.08);
+  border: 1px solid var(--site-border-subtle);
 }
 
 .VPHero .name,
@@ -55,9 +207,9 @@ body {
 }
 
 .VPFeature {
-  border: 1px solid rgba(77, 36, 25, 0.08);
-  background: linear-gradient(180deg, rgba(255, 250, 244, 0.92), rgba(255, 248, 238, 0.88));
-  box-shadow: 0 16px 40px rgba(77, 36, 25, 0.06);
+  border: 1px solid var(--site-border-subtle);
+  background: var(--site-feature-bg);
+  box-shadow: 0 16px 40px var(--site-shadow-soft);
 }
 
 .post-list {
@@ -68,10 +220,10 @@ body {
 
 .post-card {
   padding: 1.2rem 1.1rem;
-  border: 1px solid rgba(77, 36, 25, 0.08);
+  border: 1px solid var(--site-border-subtle);
   border-radius: 20px;
-  background: linear-gradient(180deg, rgba(255, 250, 244, 0.94), rgba(255, 247, 237, 0.88));
-  box-shadow: 0 16px 32px rgba(77, 36, 25, 0.06);
+  background: var(--site-post-bg);
+  box-shadow: 0 16px 32px var(--site-shadow-soft);
 }
 
 .post-card-date {
@@ -128,10 +280,10 @@ body {
 
 .profile-hero-card {
   padding: 1.4rem;
-  border: 1px solid rgba(77, 36, 25, 0.08);
+  border: 1px solid var(--site-border-subtle);
   border-radius: 24px;
-  background: linear-gradient(180deg, rgba(255, 250, 244, 0.96), rgba(255, 246, 234, 0.92));
-  box-shadow: 0 18px 36px rgba(77, 36, 25, 0.07);
+  background: var(--site-card-bg);
+  box-shadow: 0 18px 36px var(--site-shadow-card);
 }
 
 .profile-hero-card h2 {
@@ -165,7 +317,7 @@ body {
   width: 180px;
   height: 180px;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(224, 168, 59, 0.22), rgba(224, 168, 59, 0));
+  background: var(--site-meta-glow);
   pointer-events: none;
 }
 
@@ -183,10 +335,10 @@ body {
 
 .service-card {
   padding: 1.35rem;
-  border: 1px solid rgba(77, 36, 25, 0.08);
+  border: 1px solid var(--site-border-subtle);
   border-radius: 24px;
-  background: linear-gradient(180deg, rgba(255, 250, 244, 0.96), rgba(255, 246, 234, 0.92));
-  box-shadow: 0 18px 36px rgba(77, 36, 25, 0.07);
+  background: var(--site-card-bg);
+  box-shadow: 0 18px 36px var(--site-shadow-card);
 }
 
 .service-card h2,
@@ -198,7 +350,7 @@ body {
   margin: 1.5rem 0;
   padding: 1rem 1.1rem;
   border-left: 4px solid var(--vp-c-brand-1);
-  background: rgba(184, 59, 36, 0.08);
+  background: var(--site-note-bg);
   border-radius: 0 16px 16px 0;
 }
 
@@ -213,9 +365,9 @@ body {
 
 .service-tags li {
   padding: 0.45rem 0.75rem;
-  border: 1px solid rgba(77, 36, 25, 0.1);
+  border: 1px solid var(--site-border-tag);
   border-radius: 999px;
-  background: rgba(255, 250, 244, 0.9);
+  background: var(--site-tag-bg);
   font-size: 0.95rem;
 }
 
