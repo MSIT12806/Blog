@@ -9,7 +9,7 @@ const siteUrl =
   (isGitHubActions
     ? `https://${ownerName.toLowerCase()}.github.io/${repoName}/`
     : 'https://msit12806.github.io/Blog/')
-const gaMeasurementId = process.env.VITE_GA_ID ?? process.env.GA_MEASUREMENT_ID ?? 'G-WEEBE28NTY'
+const gaMeasurementId = process.env.VITE_GA_ID || process.env.GA_MEASUREMENT_ID || 'G-WEEBE28NTY'
 const socialLinks = repository
   ? [{ icon: 'github', link: `https://github.com/${repository}` }]
   : []
