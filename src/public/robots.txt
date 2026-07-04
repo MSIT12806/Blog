@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://msit12806.github.io/Blog/sitemap.xml

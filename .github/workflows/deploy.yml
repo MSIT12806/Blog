@@ -36,6 +36,9 @@ jobs:
 
       - name: Build with VitePress
         run: npm run build
+        env:
+          VITE_GA_ID: ${{ secrets.VITE_GA_ID }}
+          SITE_URL: https://msit12806.github.io/Blog/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
