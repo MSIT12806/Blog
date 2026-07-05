@@ -46,7 +46,7 @@ export default {
   lang: 'zh-Hant',
   title: 'Robin',
   description: 'Robin 的技術筆記、作品入口與個人介紹網站',
-  cleanUrls: true,
+  cleanUrls: false,
   lastUpdated: hasGit,
   base: isGitHubActions ? `/${repoName}/` : '/',
   sitemap: {

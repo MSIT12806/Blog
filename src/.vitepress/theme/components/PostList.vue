@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
+import { withBase } from 'vitepress'
 import { data as allPosts } from '../data/posts.data.mjs'
 
 const props = defineProps({
@@ -52,6 +53,10 @@ function formatDate(value) {
 function selectTag(tag) {
   selectedTag.value = selectedTag.value === tag ? '' : tag
 }
+
+function postHref(url) {
+  return withBase(url)
+}
 </script>
 
 <template>
@@ -88,7 +93,7 @@ function selectTag(tag) {
       </p>
 
       <h3 class="post-card-title">
-        <a :href="post.url">{{ post.title }}</a>
+        <a :href="postHref(post.url)">{{ post.title }}</a>
       </h3>
 
       <p v-if="post.description" class="post-card-description">
@@ -108,7 +113,7 @@ function selectTag(tag) {
         </button>
       </div>
 
-      <a class="post-card-link" :href="post.url">閱讀文章</a>
+      <a class="post-card-link" :href="postHref(post.url)">閱讀文章</a>
     </article>
   </div>
 </template>
