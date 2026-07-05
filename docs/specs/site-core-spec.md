@@ -131,8 +131,10 @@ flowchart TD
 4. 撰寫新文章方式。
    - 使用 Markdown 程式碼區塊示範 front matter。
    - 說明首頁與列表頁會自動讀取並排序文章。
+   - 說明可透過 `tags` front matter 加上多個文章標籤。
 
 文章列表不手動維護文章連結，必須透過 `PostList` 與 `posts.data.mjs` 自動產生。
+完整文章列表會在列表上方顯示所有文章標籤，點擊標籤後只顯示帶有該標籤的文章；再次點擊目前標籤或點擊「全部」會回到完整列表。
 
 ### 4.4 文章詳情頁
 
@@ -147,6 +149,9 @@ flowchart TD
 title: 文章標題
 date: 2026-03-28
 description: 文章摘要
+tags:
+  - C#
+  - 測試
 ---
 ```
 
@@ -156,6 +161,7 @@ description: 文章摘要
 2. `##` 分段。
 3. 條列內容優先使用有序或無序清單。
 4. 如需從列表隱藏，加入 `draft: true`。
+5. 如需分類，加入 `tags` 陣列；一篇文章可同時擁有多個標籤。
 
 文章會由 `posts.data.mjs` 依 `date` 由新到舊排序。缺少 `title` 的文章不會出現在列表中。
 
@@ -204,7 +210,11 @@ Props：
 1. 日期：`post-card-date`，使用 `Intl.DateTimeFormat('zh-TW')` 格式化。
 2. 標題：`post-card-title`，連到文章 URL。
 3. 摘要：`post-card-description`。
-4. 文字連結：`閱讀文章`。
+4. 標籤：`post-card-tags` / `post-card-tag`，顯示文章 `tags`。
+5. 文字連結：`閱讀文章`。
+
+當 `limit` 大於 0 時，`PostList` 只顯示前 N 篇文章，不顯示標籤篩選器；此模式用於首頁最新文章區塊。
+當 `limit` 為 0 時，`PostList` 顯示完整文章列表與 `post-tag-filter` 標籤篩選器；此模式用於 `/posts/` 文章列表頁。
 
 ### 5.2 文章資料載入器
 
@@ -217,8 +227,18 @@ Props：
 1. 排除 `/posts/` 列表頁本身。
 2. 只保留有 `frontmatter.title` 的文章。
 3. 排除 `frontmatter.draft` 為 truthy 的文章。
-4. 輸出欄位：`title`、`url`、`date`、`description`、`timestamp`。
+4. 輸出欄位：`title`、`url`、`date`、`description`、`tags`、`timestamp`。
 5. 依 `timestamp` 由新到舊排序。
+
+`tags` 來源為 front matter：
+
+```md
+tags:
+  - Test
+  - 測試
+```
+
+建議使用陣列格式。若 `tags` 寫成逗號分隔字串，loader 會切分並去除空白；若未填寫，輸出空陣列。
 
 ## 6. 視覺與排版風格
 
@@ -298,9 +318,13 @@ Dark Mode 目前以深棕黑背景與淺暖色文字為主：
 文章卡片：
 
 - `.post-list` 使用 grid，gap `1rem`。
+- `.post-tag-filter` 使用 flex wrap，顯示「全部」與所有文章標籤。
+- `.post-tag-filter-button` 是可點擊 pill，active 與 hover 使用品牌色與淡品牌背景。
 - `.post-card` padding 約 `1.2rem`，圓角 `20px`。
 - 背景為淺色垂直漸層。
 - 使用細邊框與低透明度陰影。
+- `.post-card-tags` 使用 flex wrap。
+- `.post-card-tag` 是小型 pill；完整列表頁可點擊篩選，首頁限量列表中只作為標籤顯示。
 
 服務卡片：
 
@@ -337,8 +361,9 @@ Dark Mode 目前以深棕黑背景與淺暖色文字為主：
 
 1. 在 `src/posts/` 新增 `.md`。
 2. 加上 `title`、`date`、`description` front matter。
-3. 草稿加上 `draft: true`。
-4. 不需要手動修改首頁或文章列表。
+3. 如需分類，加上 `tags` 陣列；同一篇文章可以有多個標籤。
+4. 草稿加上 `draft: true`。
+5. 不需要手動修改首頁或文章列表。
 
 ### 7.2 新增一般頁面
 
@@ -365,5 +390,5 @@ Dark Mode 目前以深棕黑背景與淺暖色文字為主：
 1. `/profile` 頁面入口被隱藏，若恢復需重新整理導覽與首頁 CTA。
 2. `profile-hero` 相關 CSS 存在，但目前沒有對應公開頁面使用。
 3. `plan.md` 沒有 front matter，也沒有導覽入口。
-4. 文章分類、標籤、SEO metadata、留言、全文搜尋仍是未來可能功能。
+4. SEO metadata、留言、全文搜尋仍是未來可能功能。
 5. README 使用 `doc` 目錄，但本規格依使用者要求建立在 `docs/specs`；未來若要統一文件目錄，需另行整理。

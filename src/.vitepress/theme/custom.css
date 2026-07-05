@@ -218,6 +218,36 @@ body {
   margin: 1.5rem 0;
 }
 
+.post-tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.post-tag-filter-button,
+.post-card-tag {
+  border: 1px solid var(--site-border-tag);
+  border-radius: 999px;
+  background: var(--site-tag-bg);
+  color: var(--vp-c-text-2);
+  font: inherit;
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.post-tag-filter-button {
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+}
+
+.post-tag-filter-button:hover,
+.post-tag-filter-button.is-active {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
 .post-card {
   padding: 1.2rem 1.1rem;
   border: 1px solid var(--site-border-subtle);
@@ -248,6 +278,27 @@ body {
 .post-card-description {
   margin: 0.6rem 0 0;
   color: var(--vp-c-text-2);
+}
+
+.post-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+
+.post-card-tag {
+  padding: 0.32rem 0.62rem;
+  cursor: pointer;
+}
+
+.post-card-tag:disabled {
+  cursor: default;
+}
+
+.post-card-tag:not(:disabled):hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
 }
 
 .post-card-link {
