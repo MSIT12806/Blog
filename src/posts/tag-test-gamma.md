@@ -5,6 +5,8 @@ description: 用來驗證中文標籤可以獨立篩選。
 tags:
   - 測試
   - VitePress
+series: 標籤測試系列
+seriesOrder: 3
 ---
 
 # 標籤測試文章 Gamma

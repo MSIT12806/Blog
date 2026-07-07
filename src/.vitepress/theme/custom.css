@@ -218,6 +218,33 @@ body {
   margin: 1.5rem 0;
 }
 
+.post-list-controls {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.post-search {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--vp-c-text-2);
+  font-weight: 600;
+}
+
+.post-search input {
+  width: 100%;
+  padding: 0.68rem 0.8rem;
+  border: 1px solid var(--site-border-tag);
+  border-radius: 16px;
+  background: var(--site-tag-bg);
+  color: var(--vp-c-text-1);
+  font: inherit;
+}
+
+.post-search input:focus {
+  border-color: var(--vp-c-brand-1);
+  outline: 3px solid var(--vp-c-brand-soft);
+}
+
 .post-tag-filter {
   display: flex;
   flex-wrap: wrap;
@@ -310,6 +337,78 @@ body {
 .post-list-empty {
   margin: 0;
   color: var(--vp-c-text-2);
+}
+
+.article-footer-links {
+  display: grid;
+  gap: 1.2rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--site-border-subtle);
+}
+
+.article-related-section h2 {
+  margin: 0 0 0.8rem;
+  font-family: var(--vp-font-family-heading);
+  font-size: 1.25rem;
+}
+
+.article-series-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.article-series-link,
+.article-recent-list li {
+  border: 1px solid var(--site-border-subtle);
+  border-radius: 16px;
+  background: var(--site-post-bg);
+  box-shadow: 0 12px 28px var(--site-shadow-soft);
+}
+
+.article-series-link {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.article-series-link:hover .article-series-title {
+  color: var(--vp-c-brand-1);
+}
+
+.article-series-label {
+  color: var(--vp-c-text-2);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.article-series-title {
+  color: var(--vp-c-text-1);
+  font-weight: 700;
+}
+
+.article-recent-list {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.article-recent-list li {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.75rem 0.9rem;
+}
+
+.article-recent-list span {
+  flex: none;
+  color: var(--vp-c-text-2);
+  font-size: 0.86rem;
 }
 
 .vp-doc a,
@@ -438,5 +537,13 @@ body {
 
   .service-grid {
     grid-template-columns: 1fr;
+  }
+
+  .article-series-links {
+    grid-template-columns: 1fr;
+  }
+
+  .article-recent-list li {
+    display: grid;
   }
 }

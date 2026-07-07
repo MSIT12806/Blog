@@ -20,6 +20,15 @@ function normalizeTags(value) {
   return []
 }
 
+function normalizeSeries(value) {
+  return typeof value === 'string' ? value.trim() : ''
+}
+
+function toSeriesOrder(value) {
+  const order = Number(value)
+  return Number.isFinite(order) ? order : null
+}
+
 export default createContentLoader('posts/*.md', {
   transform(raw) {
     return raw
@@ -32,6 +41,8 @@ export default createContentLoader('posts/*.md', {
         date: frontmatter.date ?? '',
         description: frontmatter.description ?? '',
         tags: normalizeTags(frontmatter.tags),
+        series: normalizeSeries(frontmatter.series),
+        seriesOrder: toSeriesOrder(frontmatter.seriesOrder),
         timestamp: toTimestamp(frontmatter.date)
       }))
       .sort((first, second) => second.timestamp - first.timestamp)

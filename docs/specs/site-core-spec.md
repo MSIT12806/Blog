@@ -128,13 +128,18 @@ flowchart TD
 1. 頁面標題：`# 文章列表`。
 2. 簡短說明段落。
 3. `<PostList />` 顯示所有非草稿文章。
+   - 列表上方提供搜尋框，可即時搜尋文章 `title`、`description`、`tags`。
+   - 搜尋可與標籤篩選同時作用。
+   - 無符合結果時顯示清楚空狀態。
 4. 撰寫新文章方式。
    - 使用 Markdown 程式碼區塊示範 front matter。
    - 說明首頁與列表頁會自動讀取並排序文章。
    - 說明可透過 `tags` front matter 加上多個文章標籤。
+   - 說明可透過 `series` 與 `seriesOrder` 建立同系列文章順序。
 
 文章列表不手動維護文章連結，必須透過 `PostList` 與 `posts.data.mjs` 自動產生。
 完整文章列表會在列表上方顯示所有文章標籤，點擊標籤後只顯示帶有該標籤的文章；再次點擊目前標籤或點擊「全部」會回到完整列表。
+完整文章列表的搜尋範圍限於文章 metadata，不做 Markdown 全文搜尋或中文分詞。搜尋、標籤篩選與無結果狀態都由 `PostList` 在瀏覽器端即時處理，不需要重新整理頁面。
 
 ### 4.4 文章詳情頁
 
@@ -152,6 +157,8 @@ description: 文章摘要
 tags:
   - C#
   - 測試
+series: Clean Code
+seriesOrder: 1
 ---
 ```
 
@@ -162,8 +169,12 @@ tags:
 3. 條列內容優先使用有序或無序清單。
 4. 如需從列表隱藏，加入 `draft: true`。
 5. 如需分類，加入 `tags` 陣列；一篇文章可同時擁有多個標籤。
+6. 如需建立系列文章，加入 `series` 與 `seriesOrder`。
+7. 文章頁底部會依同系列的 `seriesOrder` 顯示上一篇與下一篇連結；沒有同系列、沒有上一篇或沒有下一篇時，不顯示空白或錯誤區塊。
+8. 文章頁底部會自動顯示發布日期早於目前文章的最近 3 篇文章；少於 3 篇時顯示現有數量，沒有可顯示文章時不顯示該區塊。
 
 文章會由 `posts.data.mjs` 依 `date` 由新到舊排序。缺少 `title` 的文章不會出現在列表中。
+`date` 是文章發布日期與近期文章排序來源，不使用檔案建檔日期。
 
 ### 4.5 關於頁
 
@@ -214,9 +225,30 @@ Props：
 5. 文字連結：`閱讀文章`。
 
 當 `limit` 大於 0 時，`PostList` 只顯示前 N 篇文章，不顯示標籤篩選器；此模式用於首頁最新文章區塊。
-當 `limit` 為 0 時，`PostList` 顯示完整文章列表與 `post-tag-filter` 標籤篩選器；此模式用於 `/posts/` 文章列表頁。
+當 `limit` 為 0 時，`PostList` 顯示完整文章列表、`post-search` 搜尋框與 `post-tag-filter` 標籤篩選器；此模式用於 `/posts/` 文章列表頁。
+搜尋框會比對文章 `title`、`description`、`tags`，搜尋字串與標籤篩選同時成立時才顯示文章。
 
-### 5.2 文章資料載入器
+### 5.2 ArticleFooterLinks 元件
+
+檔案：`src/.vitepress/theme/components/ArticleFooterLinks.vue`
+
+此元件透過 VitePress theme layout 的 `doc-after` slot 掛載於文章詳情頁底部。若目前頁面不是有效文章，或沒有任何可顯示的關聯文章，元件不輸出內容。
+
+同系列文章規則：
+
+1. 只處理有 `series` 的文章。
+2. 同一 `series` 的文章依 `seriesOrder` 由小到大排序。
+3. `seriesOrder` 缺漏時排在有明確順序的文章後方，並以 `date` 作為次要排序。
+4. 只顯示目前文章相鄰的上一篇與下一篇。
+
+近期文章規則：
+
+1. 以 front matter `date` 轉出的 `timestamp` 判斷。
+2. 只顯示發布日期早於目前文章的文章。
+3. 不包含目前文章本身。
+4. 依日期由新到舊取最多 3 篇。
+
+### 5.3 文章資料載入器
 
 檔案：`src/.vitepress/theme/data/posts.data.mjs`
 
@@ -227,7 +259,7 @@ Props：
 1. 排除 `/posts/` 列表頁本身。
 2. 只保留有 `frontmatter.title` 的文章。
 3. 排除 `frontmatter.draft` 為 truthy 的文章。
-4. 輸出欄位：`title`、`url`、`date`、`description`、`tags`、`timestamp`。
+4. 輸出欄位：`title`、`url`、`date`、`description`、`tags`、`series`、`seriesOrder`、`timestamp`。
 5. 依 `timestamp` 由新到舊排序。
 
 `tags` 來源為 front matter：
@@ -239,6 +271,8 @@ tags:
 ```
 
 建議使用陣列格式。若 `tags` 寫成逗號分隔字串，loader 會切分並去除空白；若未填寫，輸出空陣列。
+`series` 來源為 front matter 字串；缺漏時輸出空字串。
+`seriesOrder` 會轉為數字；無效或缺漏時輸出 `null`。
 
 ## 6. 視覺與排版風格
 
@@ -318,6 +352,8 @@ Dark Mode 目前以深棕黑背景與淺暖色文字為主：
 文章卡片：
 
 - `.post-list` 使用 grid，gap `1rem`。
+- `.post-list-controls` 使用 grid，集中搜尋框與標籤篩選器。
+- `.post-search input` 使用圓角輸入框，focus 時以品牌色與淡品牌背景標示。
 - `.post-tag-filter` 使用 flex wrap，顯示「全部」與所有文章標籤。
 - `.post-tag-filter-button` 是可點擊 pill，active 與 hover 使用品牌色與淡品牌背景。
 - `.post-card` padding 約 `1.2rem`，圓角 `20px`。
@@ -325,6 +361,13 @@ Dark Mode 目前以深棕黑背景與淺暖色文字為主：
 - 使用細邊框與低透明度陰影。
 - `.post-card-tags` 使用 flex wrap。
 - `.post-card-tag` 是小型 pill；完整列表頁可點擊篩選，首頁限量列表中只作為標籤顯示。
+
+文章底部關聯連結：
+
+- `.article-footer-links` 使用上邊框與間距，接在文章內容後方。
+- `.article-series-links` 桌面為兩欄，窄螢幕改為單欄。
+- `.article-series-link` 與 `.article-recent-list li` 沿用文章卡片的淡色背景、細邊框與柔和陰影。
+- `.article-recent-list` 使用無編號清單，顯示文章標題與日期。
 
 服務卡片：
 
@@ -362,8 +405,9 @@ Dark Mode 目前以深棕黑背景與淺暖色文字為主：
 1. 在 `src/posts/` 新增 `.md`。
 2. 加上 `title`、`date`、`description` front matter。
 3. 如需分類，加上 `tags` 陣列；同一篇文章可以有多個標籤。
-4. 草稿加上 `draft: true`。
-5. 不需要手動修改首頁或文章列表。
+4. 如需建立系列文章，加上 `series` 與 `seriesOrder`。
+5. 草稿加上 `draft: true`。
+6. 不需要手動修改首頁、文章列表或文章頁底部連結。
 
 ### 7.2 新增一般頁面
 
